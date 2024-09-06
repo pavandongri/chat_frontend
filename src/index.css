@@ -83,11 +83,9 @@ ul {
   border: 1px solid #dfdfdf;
   border-radius: 10px;
   padding-bottom: 20px;
-
-  /* overflow-y: auto;
-  max-height: 400px;
-  scrollbar-width: none;
-  -ms-overflow-style: none */
+  padding-bottom: 70px;
+  overflow-y: auto;
+  /* height: calc(100vh - 80px - 50px);  */
 }
 
 
@@ -100,4 +98,5 @@ ul {
   padding: 10px;
   border-top: 1px solid #ccc;
   z-index: 1000;
+
 }

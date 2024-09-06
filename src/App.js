@@ -11,6 +11,13 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState('');
 
+  const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+
   useEffect(() => {
     const name = uuidv4()
     setUsername(name)
@@ -37,13 +44,17 @@ function App() {
     <div>
       <Header />
 
-      <div className="chat-container">
-        {messages.map((msg, index) => (
-          <div className={msg.sender === username ? 'msg-sent' : 'msg-received'} key={index}>
-            <p >{msg.text}</p>
-          </div>
-        ))}
-      </div>
+      {
+        messages?.length > 0 &&
+        <div className="chat-container">
+          {messages.map((msg, index) => (
+            <div className={msg.sender === username ? 'msg-sent' : 'msg-received'} key={index + Date.now()}>
+              <p >{msg.text}</p>
+            </div>
+          ))}
+          <div ref={chatEndRef} />
+        </div>
+      }
 
       <form className='msg-form' onSubmit={sendMessage}>
         <div className='msg-input-container'>
@@ -55,8 +66,6 @@ function App() {
           <button type="submit">Send</button>
         </div>
       </form>
-
-
     </div>
   );
 }
